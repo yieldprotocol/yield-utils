@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity ^0.6.10;
 
+import "./interfaces/maker/IDai.sol";
 import "./interfaces/IERC2612.sol";
-import "./interfaces/IDai.sol";
 import "./interfaces/IDelegable.sol";
 
 /// @dev This library encapsulates methods obtain authorizations using packed signatures
