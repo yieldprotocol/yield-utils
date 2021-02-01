@@ -1,6 +1,6 @@
 {
   "name": "@yield-protocol/utils",
-  "version": "0.9.1",
+  "version": "1.0.1",
   "description": "Solidity contracts used for Yield projects that can be reused",
   "author": "Yield Inc.",
   "files": [
@@ -20,12 +20,11 @@
   },
   "scripts": {
     "build": "buidler compile",
-    "test": "buidler test test/*.ts test/pool/*.ts",
-    "test:non-functional": "buidler test test/non-functional/*.ts",
+    "test": "buidler test test/*.ts",
     "ganache": "./scripts/ganache.sh",
     "deploy:ganache": "yarn ganache && truffle migrate",
     "mainnet-ganache": "./scripts/mainnet-ganache.sh",
-    "coverage": "buidler coverage --network coverage --temp build --testfiles 'test/*.ts test/pool/*.ts'",
+    "coverage": "buidler coverage --network coverage --temp build --testfiles 'test/*.ts'",
     "lint": "prettier ./test/**/*.ts --check",
     "lint:ts": "prettier ./test/**/*.ts --write",
     "lint:sol": "solhint -f table contracts/**/*.sol"
