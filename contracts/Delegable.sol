@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity ^0.6.10;
 
-import "../interfaces/IDelegable.sol";
+import "./interfaces/IDelegable.sol";
 
 
 /// @dev Delegable enables users to delegate their account management to other users.
