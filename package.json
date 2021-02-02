@@ -5,8 +5,11 @@
   "author": "Yield Inc.",
   "files": [
     "contracts",
-    "contracts/interfaces"
+    "contracts/interfaces",
+    "dist"
   ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "homepage": "https://yield.is",
   "repository": {
     "url": "https://github.com/yieldprotocol/yield-utils",
@@ -24,7 +27,8 @@
     "coverage": "hardhat coverage",
     "lint": "prettier ./test/**/*.ts --check",
     "lint:ts": "prettier ./test/**/*.ts --write",
-    "lint:sol": "solhint -f table contracts/**/*.sol"
+    "lint:sol": "solhint -f table contracts/**/*.sol",
+    "prepublishOnly": "npx tsdx build --tsconfig ./tsconfig-publish.json"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
@@ -33,7 +37,6 @@
     "@types/mocha": "^8.0.0",
     "chai": "4.2.0",
     "ethereum-waffle": "^3.2.2",
-    "ethers": "^5.0.7",
     "hardhat": "^2.0.8",
     "hardhat-typechain": "^0.3.4",
     "mocha": "^7.1.0",
@@ -41,10 +44,14 @@
     "solhint": "^3.2.0",
     "solidity-coverage": "^0.7.14",
     "ts-node": "^8.10.2",
+    "tsdx": "^0.14.1",
     "typechain": "^4.0.1",
     "typechain-target-ethers-v5": "^5.0.1",
-    "typescript": "^3.9.7",
-    "ethereumjs-util": "^7.0.8"
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "ethereumjs-util": "^7.0.8",
+    "ethers": "^5.0.7"
   },
   "license": "GPL-3.0-or-later"
 }

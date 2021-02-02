@@ -4,6 +4,11 @@
 *.swp
 *.swo
 
+# packaging
+*.tar.gz
+*.tgz
+package/
+
 # Buidler files
 cache
 artifacts
@@ -30,3 +35,5 @@ package-lock.json
 # Crytic
 crytic-export/
 
+# Typescript
+dist/
