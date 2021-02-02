@@ -1,5 +1,5 @@
 import DecimalMathArtifact from '../artifacts/contracts/test/DecimalMathMock.sol/DecimalMathMock.json'
-import { DecimalMathMock as DecimalMath } from '../typechain/DecimalMathMock.d'
+import { DecimalMathMock as DecimalMath } from '../typechain/DecimalMathMock'
 
 import { ethers, waffle } from 'hardhat'
 const { deployContract } = waffle
