@@ -2,7 +2,6 @@ import DelegableArtifact from '../artifacts/contracts/test/DelegableMock.sol/Del
 import { DelegableMock as Delegable } from '../typechain/DelegableMock'
 
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/dist/src/signer-with-address'
-// @ts-ignore
 import { ethers, waffle } from 'hardhat'
 const { deployContract } = waffle
 import { expect } from 'chai'
