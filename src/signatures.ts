@@ -2,9 +2,17 @@ import { keccak256, defaultAbiCoder, toUtf8Bytes, solidityPack } from 'ethers/li
 import { BigNumberish } from 'ethers'
 import { ecsign } from 'ethereumjs-util'
 
-export const sign = (digest: any, privateKey: any) => {
+// Private keys for hardhat's mnemonic.
+export const privateKey0 = Buffer.from('59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d', 'hex')
+export const privateKey1 = Buffer.from('5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a', 'hex')
+
+export const signPacked = (digest: any, privateKey: any) => {
   const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), privateKey)
   return '0x' + r.toString('hex') + s.toString('hex') + v.toString(16)
+}
+
+export const sign = (digest: any, privateKey: any) => {
+  return ecsign(Buffer.from(digest.slice(2), 'hex'), privateKey)
 }
 
 export const SIGNATURE_TYPEHASH = keccak256(
