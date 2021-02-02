@@ -16,7 +16,7 @@ describe('Delegable', () => {
   let otherAcc: SignerWithAddress
   let other: string
 
-  before(async () => {
+  beforeEach(async () => {
     const signers = await ethers.getSigners()
     ownerAcc = signers[0]
     owner = await ownerAcc.getAddress()
@@ -54,7 +54,7 @@ describe('Delegable', () => {
 
   describe('with delegates', async () => {
     beforeEach(async () => {
-      // await delegable.addDelegate(other) <-- Keeps state from 'adds delegates'
+      await delegable.addDelegate(other)
     })
 
     it('does not allow adding the same delegation twice', async () => {
@@ -66,7 +66,7 @@ describe('Delegable', () => {
     })
 
     it('allows calling restricted functions to delegates', async () => {
-      await delegableFromOther.restricted(owner) //  <-- It fails if placed after 'revokes delegates'
+      await delegableFromOther.restricted(owner)
     })
 
     it('revokes delegates', async () => {
