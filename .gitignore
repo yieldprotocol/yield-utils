@@ -9,6 +9,7 @@ cache
 artifacts
 node_modules/
 output/
+typechain/
 
 # Truffle files
 .infuraKey
@@ -28,3 +29,4 @@ package-lock.json
 
 # Crytic
 crytic-export/
+
