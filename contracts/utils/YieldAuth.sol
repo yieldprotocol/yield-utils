@@ -2,8 +2,8 @@
 pragma solidity ^0.6.10;
 
 import "../interfaces/maker/IDai.sol";
-import "../interfaces/IERC2612.sol";
-import "../interfaces/IDelegable.sol";
+import "../access/IERC2612.sol";
+import "../access/IDelegable.sol";
 
 /// @dev This library encapsulates methods obtain authorizations using packed signatures
 library YieldAuth {
