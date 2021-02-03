@@ -1,11 +1,11 @@
 {
   "name": "@yield-protocol/utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Solidity contracts used for Yield projects that can be reused",
   "author": "Yield Inc.",
   "files": [
     "contracts",
-    "contracts/interfaces"
+    "!contracts/test"
   ],
   "homepage": "https://yield.is",
   "repository": {

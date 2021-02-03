@@ -1,5 +1,5 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/dist/src/signer-with-address'
-import OrchestratedArtifact from '../artifacts/contracts/Orchestrated.sol/Orchestrated.json'
+import OrchestratedArtifact from '../artifacts/contracts/access/Orchestrated.sol/Orchestrated.json'
 import { Orchestrated } from '../typechain/Orchestrated'
 
 import { ethers, waffle } from 'hardhat'
