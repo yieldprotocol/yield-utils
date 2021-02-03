@@ -6,7 +6,6 @@ import { ethers, waffle } from 'hardhat'
 const { deployContract } = waffle
 import { expect } from 'chai'
 
-
 describe('Delegable', () => {
   let delegable: Delegable
   let delegableFromOther: Delegable
@@ -31,19 +30,11 @@ describe('Delegable', () => {
   })
 
   it('does not allow calling restricted functions to others', async () => {
-    await expect(
-      delegableFromOther.restricted(owner)
-    ).to.be.revertedWith(
-        'DelegableMock: Forbidden'
-    )
+    await expect(delegableFromOther.restricted(owner)).to.be.revertedWith('DelegableMock: Forbidden')
   })
 
   it('does not allow revoking delegations that do not exist', async () => {
-    await expect(
-      delegable.revokeDelegate(other)
-    ).to.be.revertedWith(
-        'Delegable: Already undelegated'
-    )
+    await expect(delegable.revokeDelegate(other)).to.be.revertedWith('Delegable: Already undelegated')
   })
 
   it('adds delegates', async () => {
@@ -57,11 +48,7 @@ describe('Delegable', () => {
     })
 
     it('does not allow adding the same delegation twice', async () => {
-      await expect(
-        delegable.addDelegate(other)
-      ).to.be.revertedWith(
-          'Delegable: Already delegated'
-      )
+      await expect(delegable.addDelegate(other)).to.be.revertedWith('Delegable: Already delegated')
     })
 
     it('allows calling restricted functions to delegates', async () => {
