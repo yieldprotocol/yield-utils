@@ -45,12 +45,7 @@ describe('Delegable', () => {
 
     // Sign it
     const { v, r, s } = sign(digest, privateKey0)
-    await delegable.addDelegateBySignature(
-      approve.user,
-      approve.delegate,
-      deadline,
-      v, r, s,
-    )
+    await delegable.addDelegateBySignature(approve.user, approve.delegate, deadline, v, r, s)
     expect(await delegable.delegated(owner, other)).to.be.true
   })
 
@@ -74,10 +69,10 @@ describe('Delegable', () => {
         other, // Change something
         approve.delegate,
         deadline,
-        v, r, s,
+        v,
+        r,
+        s
       )
-    ).to.be.revertedWith(
-      'Delegable: Invalid signature'
-    )
+    ).to.be.revertedWith('Delegable: Invalid signature')
   })
 })
