@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity ^0.6.10;
 
-import "../interfaces/maker/IDai.sol";
+import "dss-interfaces/src/dss/DaiAbstract.sol";
 import "../interfaces/IERC2612.sol";
 import "../interfaces/IDelegable.sol";
 
@@ -48,7 +48,7 @@ library YieldAuth {
     /// @param dai The Dai contract to add delegation to.
     /// @param spender The address obtaining an approval.
     /// @param signature A packed signature.
-    function permitPackedDai(IDai dai, address spender, bytes memory signature) internal {
+    function permitPackedDai(DaiAbstract dai, address spender, bytes memory signature) internal {
         bytes32 r;
         bytes32 s;
         uint8 v;

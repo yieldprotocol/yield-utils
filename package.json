@@ -1,6 +1,6 @@
 {
   "name": "@yield-protocol/utils",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Solidity contracts used for Yield projects that can be reused",
   "author": "Yield Inc.",
   "files": [
@@ -36,6 +36,7 @@
     "@openzeppelin/contracts": "^3.1.0",
     "@types/mocha": "^8.0.0",
     "chai": "4.2.0",
+    "dss-interfaces": "0.1.1",
     "ethereum-waffle": "^3.2.2",
     "hardhat": "^2.0.8",
     "hardhat-typechain": "^0.3.4",
