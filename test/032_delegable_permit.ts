@@ -21,9 +21,9 @@ describe('Delegable', () => {
 
   beforeEach(async () => {
     const signers = await ethers.getSigners()
-    ownerAcc = signers[0]
+    ownerAcc = signers[1]
     owner = await ownerAcc.getAddress()
-    otherAcc = signers[1]
+    otherAcc = signers[2]
     other = await otherAcc.getAddress()
 
     delegable = (await deployContract(signers[0], DelegableArtifact, [])) as Delegable
@@ -71,7 +71,7 @@ describe('Delegable', () => {
     const { v, r, s } = sign(digest, privateKey0)
     await expect(
       delegable.addDelegateBySignature(
-        owner, // Change something
+        other, // Change something
         approve.delegate,
         deadline,
         v, r, s,
