@@ -54,31 +54,19 @@ describe('ERC20Permit', () => {
 
     // Approve it
     await expect(erc20.permit(approve.owner, approve.spender, approve.value, deadline, v, r, s))
-    .to.emit(erc20, 'Approval')
-    .withArgs(owner, other, approve.value)
+      .to.emit(erc20, 'Approval')
+      .withArgs(owner, other, approve.value)
 
     // Re-using the same sig doesn't work since the nonce has been incremented
     // on the contract level for replay-protection
-    await expect(
-      erc20.permit(approve.owner, approve.spender, approve.value, deadline, v, r, s)
-    ).to.be.revertedWith(
+    await expect(erc20.permit(approve.owner, approve.spender, approve.value, deadline, v, r, s)).to.be.revertedWith(
       'ERC20Permit: invalid signature'
     )
 
     // invalid ecrecover's return address(0x0), so we must also guarantee that
     // this case fails
     await expect(
-      erc20.permit(
-        '0x0000000000000000000000000000000000000000',
-        approve.spender,
-        approve.value,
-        deadline,
-        '0x99',
-        r,
-        s
-      )
-    ).to.be.revertedWith(
-      'ERC20Permit: invalid signature'
-    )
+      erc20.permit('0x0000000000000000000000000000000000000000', approve.spender, approve.value, deadline, '0x99', r, s)
+    ).to.be.revertedWith('ERC20Permit: invalid signature')
   })
 })
