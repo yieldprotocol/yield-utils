@@ -39,7 +39,7 @@ export function getSignatureDigest(
   signatureCount: BigNumberish,
   deadline: BigNumberish
 ) {
-  const DOMAIN_SEPARATOR = getDomainSeparator(name, address, chainId)
+  const DOMAIN_SEPARATOR = getDomainSeparator(name, address, '1', chainId)
   return keccak256(
     solidityPack(
       ['bytes1', 'bytes1', 'bytes32', 'bytes32'],
@@ -63,6 +63,7 @@ export function getSignatureDigest(
 export function getPermitDigest(
   name: string,
   address: string,
+  version: string,
   chainId: number,
   approve: {
     owner: string
@@ -72,7 +73,7 @@ export function getPermitDigest(
   nonce: BigNumberish,
   deadline: BigNumberish
 ) {
-  const DOMAIN_SEPARATOR = getDomainSeparator(name, address, chainId)
+  const DOMAIN_SEPARATOR = getDomainSeparator(name, address, version, chainId)
   return keccak256(
     solidityPack(
       ['bytes1', 'bytes1', 'bytes32', 'bytes32'],
@@ -103,7 +104,7 @@ export function getDaiDigest(
   nonce: BigNumberish,
   deadline: BigNumberish
 ) {
-  const DOMAIN_SEPARATOR = getDomainSeparator(name, address, chainId)
+  const DOMAIN_SEPARATOR = getDomainSeparator(name, address, '1', chainId)
   return keccak256(
     solidityPack(
       ['bytes1', 'bytes1', 'bytes32', 'bytes32'],
@@ -123,14 +124,14 @@ export function getDaiDigest(
 }
 
 // Gets the EIP712 domain separator
-export function getDomainSeparator(name: string, contractAddress: string, chainId: number) {
+export function getDomainSeparator(name: string, contractAddress: string, version: string, chainId: number) {
   return keccak256(
     defaultAbiCoder.encode(
       ['bytes32', 'bytes32', 'bytes32', 'uint256', 'address'],
       [
         keccak256(toUtf8Bytes('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)')),
         keccak256(toUtf8Bytes(name)),
-        keccak256(toUtf8Bytes('1')),
+        keccak256(toUtf8Bytes(version)),
         chainId,
         contractAddress,
       ]
