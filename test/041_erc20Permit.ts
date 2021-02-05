@@ -46,6 +46,11 @@ describe('ERC20Permit', () => {
   it('overrides version', async () => {
     expect(
       await erc20Override.DOMAIN_SEPARATOR()
+    ).to.be.equal(
+      getDomainSeparator(await erc20Override.name(), erc20Override.address, await erc20Override.version(), chainId)
+    )
+    expect(
+      await erc20Override.DOMAIN_SEPARATOR()
     ).to.be.not.equal(
       getDomainSeparator(await erc20Override.name(), erc20Override.address, await erc20.version(), chainId)
     )
