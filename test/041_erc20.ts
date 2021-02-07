@@ -23,7 +23,7 @@ describe('ERC20', () => {
     otherAcc = signers[1]
     other = await otherAcc.getAddress()
 
-    erc20 = (await deployContract(signers[0], ERC20Artifact, ["Test", "TST"])) as ERC20
+    erc20 = (await deployContract(signers[0], ERC20Artifact, ['Test', 'TST'])) as ERC20
     erc20FromOther = erc20.connect(otherAcc)
   })
 
