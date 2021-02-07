@@ -16,6 +16,9 @@ Yield is offering bounties for bugs disclosed to us at [security@yield.is](mailt
 ## Contributing
 This project doesn't include any governance or upgradability features. If you have a contribution to make, please reach us out on Discord and we will consider it for a future release or product.
 
+## ChangeLog
+ - 0.1.1 - Replaced OpenZeppelin's ERC20 for our own.
+
 ## Acknowledgements
 We would like to thank Dan Robinson (Paradigm), Georgios Konstantopoulos (Paradigm), Sam Sun (Paradigm), Mikhail Vladimirov (ABDK), Gustavo Grieco (Trail of Bits), Martin Lundfall (dAppHub) and Noah Zinsmeister (Uniswap) for their feedback and advice. We wouldn't be here without them.
 
