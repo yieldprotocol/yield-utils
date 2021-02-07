@@ -2,9 +2,10 @@
 // Inspired on token.sol from DappHub
 
 pragma solidity ^0.6.10;
+import "./IERC20.sol";
 
 
-contract ERC20 {
+contract ERC20 is IERC20 {
     uint256                                           internal  _totalSupply;
     mapping (address => uint256)                      internal  _balanceOf;
     mapping (address => mapping (address => uint256)) internal  _allowance;
@@ -17,30 +18,27 @@ contract ERC20 {
         symbol = symbol_;
     }
 
-    event Approval(address indexed owner, address indexed spender, uint wad);
-    event Transfer(address indexed src, address indexed dst, uint wad);
-
-    function totalSupply() public view virtual returns (uint256) {
+    function totalSupply() public view virtual override returns (uint256) {
         return _totalSupply;
     }
 
-    function balanceOf(address guy) public view virtual returns (uint256) {
+    function balanceOf(address guy) public view virtual override returns (uint256) {
         return _balanceOf[guy];
     }
 
-    function allowance(address owner, address spender) public view virtual returns (uint256) {
+    function allowance(address owner, address spender) public view virtual override returns (uint256) {
         return _allowance[owner][spender];
     }
 
-    function approve(address spender, uint wad) public virtual returns (bool) {
+    function approve(address spender, uint wad) public virtual override returns (bool) {
         return _approve(msg.sender, spender, wad);
     }
 
-    function transfer(address dst, uint wad) public virtual returns (bool) {
+    function transfer(address dst, uint wad) public virtual override returns (bool) {
         return _transfer(msg.sender, dst, wad);
     }
 
-    function transferFrom(address src, address dst, uint wad) public virtual returns (bool) {
+    function transferFrom(address src, address dst, uint wad) public virtual override returns (bool) {
         uint256 allowed = _allowance[src][msg.sender];
         if (src != msg.sender && allowed != type(uint).max) {
             require(allowed >= wad, "ERC20: Insufficient approval");
