@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 // Inspired on token.sol from DappHub
 
-pragma solidity ^0.6.10;
+pragma solidity ^0.8.0;
 import "./IERC20.sol";
 
+
+// We are using the built-in solidity overflow protection, but for underflow we are not, so that we can use custom error messages.
 
 contract ERC20 is IERC20 {
     uint256                                           internal  _totalSupply;
@@ -13,7 +15,7 @@ contract ERC20 is IERC20 {
     uint256                                           public    decimals = 18; // standard token precision. override to customize
     string                                            public    name = "";     // Optional token name
 
-    constructor(string memory name_, string memory symbol_) public {
+    constructor(string memory name_, string memory symbol_) {
         name = name_;
         symbol = symbol_;
     }
@@ -39,18 +41,20 @@ contract ERC20 is IERC20 {
     }
 
     function transferFrom(address src, address dst, uint wad) public virtual override returns (bool) {
+        
         uint256 allowed = _allowance[src][msg.sender];
         if (src != msg.sender && allowed != type(uint).max) {
             require(allowed >= wad, "ERC20: Insufficient approval");
-            _approve(src, msg.sender, allowed - wad);
+            unchecked { _approve(src, msg.sender, allowed - wad); }
         }
 
         return _transfer(src, dst, wad);
     }
 
     function _transfer(address src, address dst, uint wad) internal virtual returns (bool) {
+        
         require(_balanceOf[src] >= wad, "ERC20: Insufficient balance");
-        _balanceOf[src] = _balanceOf[src] - wad;
+        unchecked { _balanceOf[src] = _balanceOf[src] - wad; }
         _balanceOf[dst] = _balanceOf[dst] + wad;
 
         emit Transfer(src, dst, wad);
@@ -71,9 +75,11 @@ contract ERC20 is IERC20 {
     }
 
     function _burn(address src, uint wad) internal virtual {
-        require(_balanceOf[src] >= wad, "ERC20: Insufficient balance");
-        _balanceOf[src] = _balanceOf[src] - wad;
-        _totalSupply = _totalSupply - wad;
-        emit Transfer(src, address(0), wad);
+        unchecked {
+            require(_balanceOf[src] >= wad, "ERC20: Insufficient balance");
+            _balanceOf[src] = _balanceOf[src] - wad;
+            _totalSupply = _totalSupply - wad;
+            emit Transfer(src, address(0), wad);
+        }
     }
 }

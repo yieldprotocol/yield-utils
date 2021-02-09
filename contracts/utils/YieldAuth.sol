@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-pragma solidity ^0.6.10;
+pragma solidity ^0.8.0;
 
 import "dss-interfaces/src/dss/DaiAbstract.sol";
-import "../access/IERC2612.sol";
+import "../token/IERC2612.sol";
 import "../access/IDelegable.sol";
 
 /// @dev This library encapsulates methods obtain authorizations using packed signatures

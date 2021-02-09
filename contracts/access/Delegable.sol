@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-pragma solidity ^0.6.10;
+pragma solidity ^0.8.0;
 
 import "./IDelegable.sol";
 
@@ -16,7 +16,7 @@ contract Delegable is IDelegable {
 
     mapping(address => mapping(address => bool)) public override delegated;
 
-    constructor () public {
+    constructor () {
         uint256 chainId;
         assembly {
             chainId := chainid()

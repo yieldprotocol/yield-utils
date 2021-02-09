@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-pragma solidity ^0.6.10;
+pragma solidity ^0.8.0;
 import "./Ownable.sol";
 
 
@@ -16,7 +16,7 @@ contract Orchestrated is Ownable {
 
     mapping(address => mapping (bytes4 => bool)) public orchestration;
 
-    constructor () public Ownable() {}
+    constructor () Ownable() {}
 
     /// @dev Restrict usage to authorized users
     /// @param err The error to display if the validation fails 

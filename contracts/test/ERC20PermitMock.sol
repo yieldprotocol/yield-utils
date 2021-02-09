@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-pragma solidity ^0.6.10;
+pragma solidity ^0.8.0;
 
 import "../token/ERC20Permit.sol";
 
 contract ERC20PermitMock is ERC20Permit {
-    constructor () public ERC20Permit("Test", "TST") { }
+    constructor () ERC20Permit("Test", "TST") { }
 
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
