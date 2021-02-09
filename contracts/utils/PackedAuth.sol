@@ -3,10 +3,10 @@ pragma solidity ^0.8.0;
 
 import "dss-interfaces/src/dss/DaiAbstract.sol";
 import "../token/IERC2612.sol";
-import "../access/IDelegable.sol";
+import "../access/IAuth.sol";
 
 /// @dev This library encapsulates methods obtain authorizations using packed signatures
-library YieldAuth {
+library PackedAuth {
 
     /// @dev Unpack r, s and v from a `bytes` signature.
     /// @param signature A packed signature.
@@ -21,13 +21,13 @@ library YieldAuth {
     /// @dev Use a packed `signature` to add this contract as a delegate of caller on the `target` contract.
     /// @param target The contract to add delegation to.
     /// @param signature A packed signature.
-    function addDelegatePacked(IDelegable target, bytes memory signature) internal {
+    function setAuthPacked(IAuth target, bytes memory signature) internal {
         bytes32 r;
         bytes32 s;
         uint8 v;
 
         (r, s, v) = unpack(signature);
-        target.addDelegateBySignature(msg.sender, address(this), type(uint256).max, v, r, s);
+        target.setAuthBySignature(msg.sender, address(this), type(uint256).max, v, r, s);
     }
 
     /// @dev Use a packed `signature` to add this contract as a delegate of caller on the `target` contract.
@@ -35,13 +35,13 @@ library YieldAuth {
     /// @param user The user delegating access.
     /// @param delegate The address obtaining access.
     /// @param signature A packed signature.
-    function addDelegatePacked(IDelegable target, address user, address delegate, bytes memory signature) internal {
+    function setAuthPacked(IAuth target, address user, address delegate, bytes memory signature) internal {
         bytes32 r;
         bytes32 s;
         uint8 v;
 
         (r, s, v) = unpack(signature);
-        target.addDelegateBySignature(user, delegate, type(uint256).max, v, r, s);
+        target.setAuthBySignature(user, delegate, type(uint256).max, v, r, s);
     }
 
     /// @dev Use a packed `signature` to approve `spender` on the `dai` contract for the maximum amount.
