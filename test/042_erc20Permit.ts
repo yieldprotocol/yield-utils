@@ -65,17 +65,11 @@ describe('ERC20Permit', () => {
       value: 100,
     }
 
-    // Get the user's nonce
-    const nonce = await erc20.nonces(owner)
-
     // Get the EIP712 digest
     const digest = getPermitDigest(
-      await erc20.name(),
-      erc20.address,
-      await erc20.version(),
-      chainId,
+      await erc20.DOMAIN_SEPARATOR(),
       approve,
-      nonce,
+      await erc20.nonces(owner),
       deadline
     )
 

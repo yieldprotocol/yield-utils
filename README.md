@@ -14,6 +14,7 @@ Yield is offering bounties for bugs disclosed to us at [security@yield.is](mailt
 If you have a contribution to make, please reach us out on Discord and we will consider it for a future release or product.
 
 ## ChangeLog
+ - 1.2.1 - Simplified `permit` off-chain calculations.
  - 1.2.0 - Upgrade to Solidity 0.8
  - 1.1.0 - Replaced OpenZeppelin's ERC20 for our own.
  - 1.0.0 - Contracts released as part of Yield v1

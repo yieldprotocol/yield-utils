@@ -56,7 +56,7 @@ describe('Delegable', () => {
     })
 
     it('revokes delegates', async () => {
-      delegable.revokeDelegate(other)
+      await delegable.revokeDelegate(other)
       expect(await delegable.delegated(owner, other)).to.be.false
     })
   })

@@ -37,11 +37,13 @@ describe('Delegable', () => {
       delegate: other,
     }
 
-    // Get the user's permit signature count
-    const signatureCount = await delegable.signatureCount(owner)
-
     // Get the EIP712 digest
-    const digest = getSignatureDigest(delegableName, delegable.address, chainId, approve, signatureCount, deadline)
+    const digest = getSignatureDigest(
+      await delegable.DELEGABLE_DOMAIN(),
+      approve,
+      await delegable.signatureCount(owner),
+      deadline
+    )
 
     // Sign it
     const { v, r, s } = sign(digest, privateKey0)
@@ -56,11 +58,13 @@ describe('Delegable', () => {
       delegate: other,
     }
 
-    // Get the user's permit signature count
-    const signatureCount = await delegable.signatureCount(owner)
-
     // Get the EIP712 digest
-    const digest = getSignatureDigest(delegableName, delegable.address, chainId, approve, signatureCount, deadline)
+    const digest = getSignatureDigest(
+      await delegable.DELEGABLE_DOMAIN(), 
+      approve,
+      await delegable.signatureCount(owner),
+      deadline
+    )
 
     // Sign it
     const { v, r, s } = sign(digest, privateKey0)
