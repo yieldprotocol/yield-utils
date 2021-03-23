@@ -5,10 +5,8 @@ import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/dist/src/signer-wit
 import { ethers, waffle } from 'hardhat'
 const { deployContract } = waffle
 import { expect } from 'chai'
-import { getSignatureDigest, sign, privateKey0 } from '../src/signatures'
+import { getSignatureDigest, sign, privateKey1 } from '../src/signatures'
 
-const chainId: number = 31337 // buidlerevm chain id
-const delegableName: string = 'Yield'
 const deadline: number = 100000000000000
 
 describe('Delegable', () => {
@@ -46,7 +44,7 @@ describe('Delegable', () => {
     )
 
     // Sign it
-    const { v, r, s } = sign(digest, privateKey0)
+    const { v, r, s } = sign(digest, privateKey1)
     await delegable.addDelegateBySignature(approve.user, approve.delegate, deadline, v, r, s)
     expect(await delegable.delegated(owner, other)).to.be.true
   })
@@ -67,7 +65,7 @@ describe('Delegable', () => {
     )
 
     // Sign it
-    const { v, r, s } = sign(digest, privateKey0)
+    const { v, r, s } = sign(digest, privateKey1)
     await expect(
       delegable.addDelegateBySignature(
         other, // Change something

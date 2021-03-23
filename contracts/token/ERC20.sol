@@ -41,14 +41,22 @@ contract ERC20 is IERC20 {
     }
 
     function transferFrom(address src, address dst, uint wad) public virtual override returns (bool) {
-        
-        uint256 allowed = _allowance[src][msg.sender];
-        if (src != msg.sender && allowed != type(uint).max) {
-            require(allowed >= wad, "ERC20: Insufficient approval");
-            unchecked { _approve(src, msg.sender, allowed - wad); }
-        }
+        _decreaseApproval(src, wad);
 
         return _transfer(src, dst, wad);
+    }
+
+    // Decrease approval if src != msg.sender and if not set to MAX
+    function _decreaseApproval(address src, uint wad) internal virtual returns (bool) {
+        if (src != msg.sender) {
+            uint256 allowed = _allowance[src][msg.sender];
+            if (allowed != type(uint).max) {
+                require(allowed >= wad, "ERC20: Insufficient approval");
+                unchecked { _approve(src, msg.sender, allowed - wad); }
+            }
+        }
+
+        return true;
     }
 
     function _transfer(address src, address dst, uint wad) internal virtual returns (bool) {
@@ -65,21 +73,26 @@ contract ERC20 is IERC20 {
     function _approve(address owner, address spender, uint wad) internal virtual returns (bool) {
         _allowance[owner][spender] = wad;
         emit Approval(owner, spender, wad);
+
         return true;
     }
 
-    function _mint(address dst, uint wad) internal virtual {
+    function _mint(address dst, uint wad) internal virtual returns (bool) {
         _balanceOf[dst] = _balanceOf[dst] + wad;
         _totalSupply = _totalSupply + wad;
         emit Transfer(address(0), dst, wad);
+
+        return true;
     }
 
-    function _burn(address src, uint wad) internal virtual {
+    function _burn(address src, uint wad) internal virtual returns (bool) {
         unchecked {
             require(_balanceOf[src] >= wad, "ERC20: Insufficient balance");
             _balanceOf[src] = _balanceOf[src] - wad;
             _totalSupply = _totalSupply - wad;
             emit Transfer(src, address(0), wad);
         }
+
+        return true;
     }
 }

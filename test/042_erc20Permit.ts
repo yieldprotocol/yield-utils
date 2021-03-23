@@ -8,7 +8,7 @@ import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/dist/src/signer-wit
 import { ethers, waffle } from 'hardhat'
 const { deployContract } = waffle
 import { expect } from 'chai'
-import { PERMIT_TYPEHASH, getPermitDigest, getDomainSeparator, sign, privateKey0 } from '../src/signatures'
+import { PERMIT_TYPEHASH, getPermitDigest, getDomainSeparator, sign, privateKey1 } from '../src/signatures'
 
 const chainId: number = 31337 // buidlerevm chain id
 const deadline: number = 100000000000000
@@ -74,7 +74,7 @@ describe('ERC20Permit', () => {
     )
 
     // Sign it
-    const { v, r, s } = sign(digest, privateKey0)
+    const { v, r, s } = sign(digest, privateKey1)
 
     // Approve it
     await expect(erc20.permit(approve.owner, approve.spender, approve.value, deadline, v, r, s))
