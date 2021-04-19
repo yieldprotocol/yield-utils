@@ -2,22 +2,23 @@
 // Inspired on token.sol from DappHub
 
 pragma solidity ^0.8.0;
-import "./IERC20.sol";
+import "./IERC20Metadata.sol";
 
 
 // We are using the built-in solidity overflow protection, but for underflow we are not, so that we can use custom error messages.
 
-contract ERC20 is IERC20 {
+contract ERC20 is IERC20Metadata {
     uint256                                           internal  _totalSupply;
     mapping (address => uint256)                      internal  _balanceOf;
     mapping (address => mapping (address => uint256)) internal  _allowance;
-    string                                            public    symbol;
-    uint256                                           public    decimals = 18; // standard token precision. override to customize
-    string                                            public    name = "";     // Optional token name
+    string                                            public override name = "???";
+    string                                            public override symbol = "???";
+    uint8                                             public override decimals = 18;
 
-    constructor(string memory name_, string memory symbol_) {
+    constructor(string memory name_, string memory symbol_, uint8 decimals_) {
         name = name_;
         symbol = symbol_;
+        decimals = decimals_;
     }
 
     function totalSupply() public view virtual override returns (uint256) {

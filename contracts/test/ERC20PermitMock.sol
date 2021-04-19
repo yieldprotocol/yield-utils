@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "../token/ERC20Permit.sol";
 
 contract ERC20PermitMock is ERC20Permit {
-    constructor () ERC20Permit("Test", "TST") { }
+    constructor () ERC20Permit("Test", "TST", 18) { }
 
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
